@@ -128,19 +128,39 @@ button:hover {
 
 @media (max-width: 768px) {
   body {
-    background-position: center center;
-    font-size: 16px;
-    padding: 0 1rem;
+    background: none; /* verhindert doppeltes Bild */
+    overflow: auto;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: url('hogwarts.png') center top no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    z-index: -1;
+    opacity: 1;
   }
 
   h2.magic-font.magic-glow {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
     font-size: 2rem;
-    margin: 2rem 0 1rem 0;
-    padding: 0 1rem;
+    padding: 1rem;
+    margin: 0;
+    background: rgba(0, 0, 0, 0.6);
+    text-align: center;
+    z-index: 100;
   }
 
   .name-grid {
-    padding: 5rem 3vw 2rem 3vw;
+    padding: 5.5rem 3vw 2rem 3vw;
     gap: 0.8rem;
   }
 
