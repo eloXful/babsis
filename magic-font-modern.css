@@ -133,18 +133,19 @@ button:hover {
   }
 
   body::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: url('hogwarts.png') center top no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
-    z-index: -1;
-    opacity: 0.69;
-    backdrop-filter: blur(3px);
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: url('hogwarts.png') center top no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  z-index: -2; /* ganz weit hinten */
+  opacity: 0.69;
+  backdrop-filter: blur(3px);
+  pointer-events: none; /* ← ganz wichtig! */
   }
 
   h2.magic-font.magic-glow {
@@ -166,6 +167,8 @@ button:hover {
     padding-right: 3vw;
     padding-bottom: 2rem;
     gap: 0.8rem;
+    position: relative;
+    z-index: 1;
   }
 
   button {
@@ -194,18 +197,5 @@ button:hover {
 
   .hut-overlay {
     width: 80vw;
-  }
-}
-
-@media (max-width: 480px) {
-  .name-grid {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  button {
-    width: 100%;
-    max-width: 320px;
-    min-width: unset;
   }
 }
