@@ -196,3 +196,16 @@ button:hover {
     width: 80vw;
   }
 }
+
+@media (max-width: 480px) {
+  .name-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  button {
+    width: 100%;
+    max-width: 320px;
+    min-width: unset;
+  }
+}
