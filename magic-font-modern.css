@@ -11,7 +11,7 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center top;
-  overflow: hidden;
+  overflow: auto;
   font-family: 'Cormorant Garamond', serif;
 }
 
@@ -24,7 +24,8 @@ body::before {
   height: 100vh;
   background: rgba(13, 27, 42, 0.69);
   backdrop-filter: blur(3px);
-  z-index: -1;
+  z-index: -2;
+  pointer-events: none;
 }
 
 h2.magic-font.magic-glow {
@@ -106,19 +107,24 @@ button:hover {
   width: 100vw;
   height: 100vh;
   background: rgba(0, 0, 0, 0.85);
+  display: none;
   justify-content: center;
   align-items: center;
   z-index: 999;
-  color: white;
-  font-size: 5rem;
-  font-weight: bold;
+  color: #fff7d6;
+  font-size: 4.5rem;
+  font-family: 'Uncial Antiqua', cursive;
   text-align: center;
   padding: 2rem;
-  display: none;
+  pointer-events: none;
+  box-sizing: border-box;
+  line-height: 1.3;
+  text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
 }
 
 .result-layer.visible {
   display: flex;
+  pointer-events: auto;
 }
 
 /* Ergänzt für Tischnamen und Konsistenz */
@@ -129,7 +135,12 @@ button:hover {
 @media (max-width: 768px) {
   body {
     background: none;
-    overflow: auto;
+    overflow: hidden;
+  }
+
+  html, body {
+    height: 100%;
+    touch-action: manipulation; /* optional gegen Scrollprobleme */
   }
 
   body::before {
@@ -167,7 +178,13 @@ button:hover {
     padding-right: 3vw;
     padding-bottom: 2rem;
     gap: 0.8rem;
-    position: relative;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
     z-index: 1;
   }
 
@@ -180,7 +197,8 @@ button:hover {
   }
 
 .result-layer {
-    display: flex;
+    display: none;
+    z-index: 999;
     justify-content: center;   
     align-items: center;       
     text-align: center;
@@ -188,9 +206,14 @@ button:hover {
     padding: 1.2rem;
     box-sizing: border-box;
     line-height: 1.2;
+    text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
   }
 
-  .result-layer span {
+.result-layer.visible {
+  display: flex; /* → liegt VOR allem! */
+}
+
+.result-layer span {
     display: block;
     width: 100%;
   }
@@ -222,6 +245,7 @@ button:hover {
   .result-layer {
     font-size: 2rem;
     padding: 1rem;
+    text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
   }
 
   .hut-overlay {
