@@ -128,24 +128,24 @@ button:hover {
 
 @media (max-width: 768px) {
   body {
-    background: none; /* verhindert doppeltes Bild */
+    background: none;
     overflow: auto;
   }
 
   body::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: url('hogwarts.png') center top no-repeat;
-  background-size: cover;
-  background-attachment: fixed;
-  z-index: -2; /* ganz weit hinten */
-  opacity: 0.69;
-  backdrop-filter: blur(3px);
-  pointer-events: none; /* ← ganz wichtig! */
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(rgba(13, 27, 42, 0.69), rgba(13, 27, 42, 0.69)),
+                url('hogwarts.png') center top no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    z-index: -2;
+    backdrop-filter: blur(3px);
+    pointer-events: none;
   }
 
   h2.magic-font.magic-glow {
@@ -156,7 +156,7 @@ button:hover {
     font-size: 2rem;
     padding: 1rem;
     margin: 0;
-    background: rgba(0, 0, 0, 0.6);
+    background: none;
     text-align: center;
     z-index: 100;
   }
@@ -197,5 +197,39 @@ button:hover {
 
   .hut-overlay {
     width: 80vw;
+  }
+}
+
+@media (max-width: 480px) {
+  .name-grid {
+    flex-direction: column;      /* alle Buttons untereinander */
+    align-items: center;
+    gap: 0.6rem;
+    padding-left: 5vw;
+    padding-right: 5vw;
+    align-items: center;
+  }
+
+  button {
+    width: 100%;
+    max-width: 320px;
+    min-width: unset;
+    font-size: 1rem;
+    padding: 12px 16px;
+    box-sizing: border-box;
+  }
+
+  .result-layer {
+    font-size: 2rem;
+    padding: 1rem;
+  }
+
+  .hut-overlay {
+    width: 90vw;
+  }
+
+  h2.magic-font.magic-glow {
+    font-size: 1.8rem;
+    padding: 0.8rem;
   }
 }
