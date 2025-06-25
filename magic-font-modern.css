@@ -67,6 +67,8 @@ button {
   min-width: 220px;
   max-width: 280px;
   cursor: pointer;
+  text-align: center;           
+  letter-spacing: 0.5px; 
 }
 
 button:hover {
