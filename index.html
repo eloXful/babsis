@@ -1,0 +1,157 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Magische Hochzeit</title>
+  <link rel="stylesheet" href="magic-font-modern.css" />
+</head>
+<body>
+  <h2 class="magic-font magic-glow">An welchem Tisch sitze ich?</h2>
+
+  <div class="name-grid" id="nameGrid"></div>
+
+  <img src="talking-wizard-hat.png" alt="Sprechender Hut" class="hut-overlay" id="hat" style="display:none;" />
+
+  <div class="result-layer" id="resultLayer" onclick="resetApp()"></div>
+
+  <audio id="wandClick" src="wand-click.mp3" preload="auto"></audio>
+  <audio id="audioPlayer" preload="auto"></audio>
+
+  <script>
+    const guests = {
+      "Alan": "Goldener Schnatz",
+      "Alex": "Hedwig",
+      "André": "Gryffindor",
+      "Anil": "Gryffindor",
+      "Anna": "Hogwarts",
+      "Anne": "Goldener Schnatz",
+      "Barbie": "Hogwarts",
+      "Benne": "Der Sprechende Hut",
+      "Claudia": "Gleis 9 3/4",
+      "Cleo": "Ravenclaw",
+      "Corinna": "Gleis 9 3/4",
+      "David": "Gleis 9 3/4",
+      "Dennis": "Slytherin",
+      "Denno": "Hufflepuff",
+      "Dome": "Hedwig",
+      "Edeltraud": "Gleis 9 3/4",
+      "Etienne": "Der Sprechende Hut",
+      "Eva": "Heiligtümer des Todes",
+      "Fabian": "Ravenclaw",
+      "Fabrizio": "Slytherin",
+      "Florentina": "Hufflepuff",
+      "Florian": "Hogwarts",
+      "Geli": "Hufflepuff",
+      "Gerti": "Heiligtümer des Todes",
+      "Hakan": "Hufflepuff",
+      "Hanne": "Gleis 9 3/4",
+      "Hans": "Gleis 9 3/4",
+      "Häsi": "Hufflepuff",
+      "Helmut": "Hogwarts",
+      "Iram": "Ravenclaw",
+      "Jan": "Der Sprechende Hut",
+      "Jasmin G.": "Hedwig",
+      "Jasmin H.": "Slytherin",
+      "Jenny": "Hedwig",
+      "Johanna": "Slytherin",
+      "Julia B.": "Slytherin",
+      "Julia R.": "Der Sprechende Hut",
+      "Julia": "Hedwig",
+      "Kai": "Hedwig",
+      "Kai B.": "Hufflepuff",
+      "Karla": "Hogwarts",
+      "Kevin": "Ravenclaw",
+      "Kim": "Goldener Schnatz",
+      "Kristin": "Slytherin",
+      "Lara": "Der Sprechende Hut",
+      "Lisa B.": "Goldener Schnatz",
+      "Lisa-Marie": "Hogwarts",
+      "Lisa": "Hufflepuff",
+      "Maggi": "Goldener Schnatz",
+      "Maja": "Gryffindor",
+      "Mandy": "Gryffindor",
+      "Manuel": "Gleis 9 3/4",
+      "Margit": "Gleis 9 3/4",
+      "Marian": "Heiligtümer des Todes",
+      "Michael": "Slytherin",
+      "Michelle": "Gryffindor",
+      "Mimi": "Hogwarts",
+      "Moritz": "Gryffindor",
+      "Nicole": "Ravenclaw",
+      "Nir": "Goldener Schnatz",
+      "Noweed": "Ravenclaw",
+      "Oliver": "Goldener Schnatz",
+      "Patrizia": "Gryffindor",
+      "Philipp": "Gryffindor",
+      "Robert": "Heiligtümer des Todes",
+      "Sandra": "Der Sprechende Hut",
+      "Sebastian": "Der Sprechende Hut",
+      "Simone": "Heiligtümer des Todes",
+      "Svenja": "Der Sprechende Hut",
+      "Thomas": "Hufflepuff",
+      "Tim": "Heiligtümer des Todes",
+      "Timo": "Hedwig",
+      "Tobi M.": "Ravenclaw",
+      "Vladi": "Slytherin",
+      "Werner": "Heiligtümer des Todes",
+    };
+
+    const tableToFilename = {
+    "Gleis 9 3/4": "Gleis934",
+    "Gryffindor": "Gryffindor",
+    "Ravenclaw": "Ravenclaw",
+    "Hufflepuff": "Hufflepuff",
+    "Slytherin": "Slytherin",
+    "Hogwarts": "Hogwarts",
+    "Hedwig": "Hedwig",
+    "Goldener Schnatz": "Goldener Schnatz",
+    "Heiligtümer des Todes": "Heiligtümer des Todes",
+    "Der Sprechende Hut": "Der Sprechende Hut"
+    };
+
+    const nameGrid = document.getElementById("nameGrid");
+    const resultLayer = document.getElementById("resultLayer");
+    const hat = document.getElementById("hat");
+    const wandSound = document.getElementById("wandClick");
+    const audioPlayer = document.getElementById("audioPlayer");
+
+    for (const name in guests) {
+      const button = document.createElement("button");
+      button.textContent = `✨ ${name}`;
+      button.onclick = () => handleSelection(name);
+      nameGrid.appendChild(button);
+    }
+
+    function handleSelection(name) {
+      const table = guests[name];
+      wandSound.currentTime = 0;
+      wandSound.play();
+      hat.style.display = "block";
+
+	setTimeout(() => {
+  	  playTableAudio(table); // Sprache startet FRÜHER
+	}, 1000);
+
+	setTimeout(() => {
+ 	 hat.style.display = "none";
+	  resultLayer.innerHTML = `<span class="magic-font magic-glow">${table}</span>`;
+	  resultLayer.classList.add("visible");
+	}, 1500);
+    }
+
+    function resetApp() {
+      resultLayer.classList.remove("visible");
+      resultLayer.innerHTML = "";
+    }
+
+    function playTableAudio(tableName) {
+      const filename = (tableToFilename[tableName] || tableName) + ".mp3";
+      audioPlayer.src = filename;
+      audioPlayer.currentTime = 0;
+      audioPlayer.play();
+    }
+  </script>
+</body>
+</html>
