@@ -125,3 +125,39 @@ button:hover {
 .magic-font {
   font-family: 'Uncial Antiqua', cursive;
 }
+
+@media (max-width: 768px) {
+  body {
+    background-position: center center;
+    font-size: 16px;
+    padding: 0 1rem;
+  }
+
+  h2.magic-font.magic-glow {
+    font-size: 2rem;
+    margin: 2rem 0 1rem 0;
+    padding: 0 1rem;
+  }
+
+  .name-grid {
+    padding: 5rem 3vw 2rem 3vw;
+    gap: 0.8rem;
+  }
+
+  button {
+    font-size: 1rem;
+    min-width: 140px;
+    max-width: 220px;
+    padding: 10px 16px;
+    border-radius: 12px;
+  }
+
+  .result-layer {
+    font-size: 2.4rem;
+    padding: 1.2rem;
+  }
+
+  .hut-overlay {
+    width: 80vw;
+  }
+}
